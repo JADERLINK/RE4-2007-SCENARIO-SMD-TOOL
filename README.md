@@ -71,6 +71,10 @@ caso o seu modelo fique muito longe da posição original, ele pode começa a ap
 ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_position*", "xxx_DrawDistanceNegative*" e "xxx_DrawDistancePositive*", pode ocasionar um bug na iluminação do modelo, no qual não sei como resolver.
 <br> caso você souber como resolver esse problema favor entrar em contato.
 
+## Código de terceiro:
+
+[ObjLoader by chrisjansson](https://github.com/chrisjansson/ObjLoader):
+Encontra-se no RE4_PMD_Repack, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
 
 **At.te: JADERLINK**
 <br>2023-10-02
