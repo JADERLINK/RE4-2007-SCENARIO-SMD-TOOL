@@ -37,7 +37,7 @@ Sendo:
 **Editando o arquivo .obj no Blender**
 <br>No importador de .obj marque a caixa "Split By Group" que esta no lado direto da tela.
 <br>Com o arquivo importado, cada objeto representa um arquivo .PMD
-![Groups](Groups.png)
+<br>![Groups](Groups.png)
 <br>Nota: caso você tenha problema com texturas transparente ficando pretas use esse plugin: (**[link](https://github.com/JADERLINK/Blender_Transparency_Fix_Plugin)**) 
 
 **Ao salvar o arquivo**
