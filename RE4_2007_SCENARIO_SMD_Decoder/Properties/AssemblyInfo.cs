@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associadas a um assembly.
 [assembly: AssemblyTitle("RE4_2007_SCENARIO_SMD_Decoder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("JADERLINK")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("RE4_2007_SCENARIO_SMD_Decoder")]
 [assembly: AssemblyProduct("RE4_2007_SCENARIO_SMD_Decoder")]

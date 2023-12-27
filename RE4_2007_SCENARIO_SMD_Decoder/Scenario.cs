@@ -218,10 +218,11 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             pos1[1] = ((pos1[1] * smdLine.scaleY) + (smdLine.positionY)) / 100f;
             pos1[2] = ((pos1[2] * smdLine.scaleZ) + (smdLine.positionZ)) / 100f;
 
+
             float[] pos2 = new float[3];// 0 = x, 1 = y, 2 = z
-            pos2[0] = box.DrawDistancePositiveX;
-            pos2[1] = box.DrawDistancePositiveY;
-            pos2[2] = box.DrawDistancePositiveZ;
+            pos2[0] = box.DrawDistanceNegativeX + box.DrawDistancePositiveX;
+            pos2[1] = box.DrawDistanceNegativeY + box.DrawDistancePositiveY;
+            pos2[2] = box.DrawDistanceNegativeZ + box.DrawDistancePositiveZ;
 
             pos2 = RotationUtils.RotationInX(pos2, smdLine.angleX);
             pos2 = RotationUtils.RotationInY(pos2, smdLine.angleY);
@@ -230,7 +231,6 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             pos2[0] = ((pos2[0] * smdLine.scaleX) + (smdLine.positionX)) / 100f;
             pos2[1] = ((pos2[1] * smdLine.scaleY) + (smdLine.positionY)) / 100f;
             pos2[2] = ((pos2[2] * smdLine.scaleZ) + (smdLine.positionZ)) / 100f;
-
 
             string DrawDistanceNegativeX = (pos1[0]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
             string DrawDistanceNegativeY = (pos1[1]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);

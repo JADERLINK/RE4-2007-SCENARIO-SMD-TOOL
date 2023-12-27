@@ -9,7 +9,7 @@ namespace RE4_2007_SCENARIO_SMD_Repack
 {
     class Program
     {
-        public static string VERSION = "B.1.0.0.0";
+        public static string VERSION = "B.1.0.0.1";
 
         static void Main(string[] args)
         {
@@ -18,7 +18,12 @@ namespace RE4_2007_SCENARIO_SMD_Repack
             Console.WriteLine($"## Version {VERSION} ##");
             Console.WriteLine("## By JADERLINK ##");
 
-            if (args.Length >= 1 && File.Exists(args[0])
+            if (args.Length == 0)
+            {
+                Console.WriteLine("For more information read:");
+                Console.WriteLine("https://github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL");
+            }
+            else if (args.Length >= 1 && File.Exists(args[0])
                 && (new FileInfo(args[0]).Extension.ToUpper() == ".IDXSCENARIO"))
 
             {
@@ -60,15 +65,12 @@ namespace RE4_2007_SCENARIO_SMD_Repack
             }
             else
             {
-                Console.WriteLine("no arguments or invalid file");
+                Console.WriteLine("Invalid file");
             }
 
             Console.WriteLine("End");
 
-
-
         }
-
 
 
     }

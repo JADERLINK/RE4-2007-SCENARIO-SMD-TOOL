@@ -5,6 +5,12 @@ Translate from Portuguese Brazil
 
 Programas destinados a extrair e recompactar os cenários usando somente um arquivo .OBJ
 
+## Update B.1.0.0.1
+
+Adicionado compatibilidade com outros editores 3D que não suportam caracteres especiais #: como, por exemplo, o 3dsMax;
+<br> Adicionado também uma verificação no nome dos grupos, então caso esteja errado o nome, o programa avisa-rá;
+<br> Os arquivos da versão anterior são compatíveis com essa versão;
+
  ## RE4_2007_SCENARIO_SMD_Extractor.exe
 
 Programa destinado para extrair o cenário, em um arquivo bat use o seguinte comando:
@@ -33,6 +39,14 @@ Sendo:
 * SMX_001 esse é o ID do SMX, veja o arquivo .SMX,  a numeração é em decimal
 * TYPE_09 esse não sei oque é, a numeração é em hexadecimal.
 * o nome do grupo deve terminar com # (pois depois de salvo o arquivo, o blender coloca mais texto no final do nome do grupo)
+
+<br> ----> No Update B.1.0.0.1, o nome dos objetos/grupos também pode ser:
+<br> SCENARIO\_PMD\_000\_SMX\_001\_TYPE\_09\_
+<br> SCENARIO\_PMD\_001\_SMX\_002\_TYPE\_09\_
+
+ ----> Sobre verificações de grupos:
+<br> * No Repack se ao lado direito do nome do grupo aparecer o texto "The group name is wrong;", significa que o nome do grupo está errado, e o seu arquivo SMD vai ficar errado;
+<br> * E se ao lado direito aparecer "Warning: Group not used;" esse grupo esta sendo ignorado pelo meu programa, caso, na verdade, você gostaria de usá-lo, você deve arrumar o nome do grupo;
 
 **Editando o arquivo .obj no Blender**
 <br>No importador de .obj marque a caixa "Split By Group" que esta no lado direto da tela.
@@ -63,9 +77,11 @@ Faz o repack do cenário, recebe como parâmetro o arquivo ".idxscenario",
 
 ## DrawDistance
 caso o seu modelo fique muito longe da posição original, ele pode começa a aparecer e desaparecer, isso é por causa dos valores que definem a que distancia os modelos iram ser vistos.
-<br> mude os valores de "xxx_DrawDistanceNegative*" para -3276,7
-<br> e os valores de "xxx_DrawDistancePositive*:" para 3276,7
+<br> mude os valores de "xxx_DrawDistanceNegative*" para -327670
+<br> e os valores de "xxx_DrawDistancePositive*:" para 655340
 <br> isso vai garantir que o modelo fique visível, porem pode gerar um bug na iluminação.
+<br> Updade B.1.0.0.1, mudei o arquivo "r209.scenario.DrawDistance.obj", para representação correta, pois "xxx_DrawDistancePositive*" não é uma posição, mas sim deve ser somado com "xxx_DrawDistanceNegative" para ter a segunda posição correta;
+
 
 ## bugs
 ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_position*", "xxx_DrawDistanceNegative*" e "xxx_DrawDistancePositive*", pode ocasionar um bug na iluminação do modelo, no qual não sei como resolver.
@@ -77,4 +93,4 @@ ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_positi
 Encontra-se no RE4_PMD_Repack, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
 
 **At.te: JADERLINK**
-<br>2023-10-02
+<br>2023-12-27

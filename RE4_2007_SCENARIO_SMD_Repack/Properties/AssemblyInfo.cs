@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("RE4_2007_SCENARIO_SMD_Repack")]
 [assembly: AssemblyDescription("RE4_2007_SCENARIO_SMD_Repack")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("JADERLINK")]
 [assembly: AssemblyProduct("RE4_2007_SCENARIO_SMD_Repack")]
 [assembly: AssemblyCopyright("Copyright © JADERLINK 2023")]
 [assembly: AssemblyTrademark("")]

@@ -12,6 +12,9 @@ namespace RE4_2007_SCENARIO_SMD_Repack
     {
         public static void Repack(string objPath, string mtlPath, string idxpath, string diretory) 
         {
+            string patternSCENARIO = "^(SCENARIO#)(P|S)(MD_)([0]{0,})([0-9]{1,3})(#SMX_)([0]{0,})([0-9]{1,3})(#TYPE_)([0]{0,})([0-9|A-F]{1,8})(#).*$";
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(patternSCENARIO, System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
             bool LoadColorsFromObjFile = true;
 
             var idxScenario = IdxScenarioLoader.Loader(new StreamReader(new FileInfo(idxpath).OpenRead(), Encoding.ASCII));
@@ -45,6 +48,29 @@ namespace RE4_2007_SCENARIO_SMD_Repack
 
                 if (GroupName.StartsWith("SCENARIO"))
                 {
+                    string materialNameInvariant = arqObj.Groups[iG].MaterialName.ToUpperInvariant().Trim();
+                    string materialName = arqObj.Groups[iG].MaterialName.Trim();
+
+                    //FIX NAME
+                    GroupName = GroupName.Replace("_", "#")
+                        .Replace("SMD#", "SMD_")
+                        .Replace("PMD#", "PMD_")
+                        .Replace("SMX#", "SMX_")
+                        .Replace("TYPE#", "TYPE_")
+                        .Replace("BIN#", "BIN_") //campo não usado
+                        ;
+
+                    //REGEX
+                    if (regex.IsMatch(GroupName))
+                    {
+                        Console.WriteLine("Loading in Obj: " + GroupName + " | " + materialNameInvariant);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Loading in Obj: " + GroupName + " | " + materialNameInvariant + "  The group name is wrong;");
+                    }
+
+
                     SmdBaseLine info = getGroupInfo(GroupName);
 
                     if (!objGroupInfos.ContainsKey(info.PmdId))
@@ -144,9 +170,6 @@ namespace RE4_2007_SCENARIO_SMD_Repack
                     }
 
 
-                    string materialNameInvariant = arqObj.Groups[iG].MaterialName.ToUpperInvariant().Trim();
-                    string materialName = arqObj.Groups[iG].MaterialName.Trim();
-
                     if (ObjList.ContainsKey(info.PmdId))
                     {
                         if (ObjList[info.PmdId].FacesByMaterial.ContainsKey(materialNameInvariant))
@@ -170,6 +193,11 @@ namespace RE4_2007_SCENARIO_SMD_Repack
                     }
 
                 }
+                else
+                {
+                    Console.WriteLine("Loading in Obj: " + GroupName + "   Warning: Group not used;");
+                }
+
             }
 
 
