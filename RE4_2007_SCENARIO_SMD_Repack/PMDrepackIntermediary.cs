@@ -39,14 +39,22 @@ namespace RE4_PMD_Repack
                         pos1 = RotationUtils.RotationInY(pos1, -smdLine.angleY);
                         pos1 = RotationUtils.RotationInX(pos1, -smdLine.angleX);
 
-
                         vertex.PosX = pos1[0] / 1000f;
                         vertex.PosY = pos1[1] / 1000f;
                         vertex.PosZ = pos1[2] / 1000f;
 
-                        vertex.NormalX = item.Value.Faces[i][iv].Normal.X;
-                        vertex.NormalY = item.Value.Faces[i][iv].Normal.Y;
-                        vertex.NormalZ = item.Value.Faces[i][iv].Normal.Z;
+                        float[] normal1 = new float[3];// 0 = x, 1 = y, 2 = z
+                        normal1[0] = item.Value.Faces[i][iv].Normal.X;
+                        normal1[1] = item.Value.Faces[i][iv].Normal.Y;
+                        normal1[2] = item.Value.Faces[i][iv].Normal.Z;
+
+                        normal1 = RotationUtils.RotationInZ(normal1, -smdLine.angleZ);
+                        normal1 = RotationUtils.RotationInY(normal1, -smdLine.angleY);
+                        normal1 = RotationUtils.RotationInX(normal1, -smdLine.angleX);
+
+                        vertex.NormalX = normal1[0];
+                        vertex.NormalY = normal1[1];
+                        vertex.NormalZ = normal1[2];
 
                         vertex.TextureU = item.Value.Faces[i][iv].Texture.U;
                         vertex.TextureV = item.Value.Faces[i][iv].Texture.V;

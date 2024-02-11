@@ -5,8 +5,11 @@ Translate from Portuguese Brazil
 
 Programas destinados a extrair e recompactar os cenários usando somente um arquivo .OBJ
 
-## Update B.1.0.0.1
+## Update B.1.0.0.2
+Corrigido bug no qual não era rotacionado as normals dos modelos que têm rotação,
+então, caso esteja usando um .obj de versões anteriores, recalcule as normals;
 
+## Update B.1.0.0.1
 Adicionado compatibilidade com outros editores 3D que não suportam caracteres especiais #: como, por exemplo, o 3dsMax;
 <br> Adicionado também uma verificação no nome dos grupos, então caso esteja errado o nome, o programa avisa-rá;
 <br> Os arquivos da versão anterior são compatíveis com essa versão;
@@ -17,10 +20,10 @@ Programa destinado para extrair o cenário, em um arquivo bat use o seguinte com
 <br>Extract Scenario:
 <br>RE4_2007_SCENARIO_SMD_Extractor.exe ".smd File patch" "Pmds Files folder" "Pmd base name"
 
-<br>Exemplo:
+Exemplo:
 <br>RE4_2007_SCENARIO_SMD_Extractor.exe "D:\Games\Re4\st2\r209\r209_04.SMD" "D:\Games\Re4\xscr\r209" "r209"
 
-<br> nesse exemplo será gerado os arquivos na pasta : D:\Games\Re4\xscr\r209
+nesse exemplo será gerado os arquivos na pasta : D:\Games\Re4\xscr\r209
 
 * r209.scenario.idxscenario  // arquivo importante de configurações;
 * r209.scenario.obj // conteúdo de todo o cenário, esse é o arquivo que você vai editar;
@@ -40,7 +43,7 @@ Sendo:
 * TYPE_09 esse não sei oque é, a numeração é em hexadecimal.
 * o nome do grupo deve terminar com # (pois depois de salvo o arquivo, o blender coloca mais texto no final do nome do grupo)
 
-<br> ----> No Update B.1.0.0.1, o nome dos objetos/grupos também pode ser:
+----> No Update B.1.0.0.1, o nome dos objetos/grupos também pode ser:
 <br> SCENARIO\_PMD\_000\_SMX\_001\_TYPE\_09\_
 <br> SCENARIO\_PMD\_001\_SMX\_002\_TYPE\_09\_
 
@@ -93,4 +96,4 @@ ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_positi
 Encontra-se no RE4_PMD_Repack, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
 
 **At.te: JADERLINK**
-<br>2023-12-27
+<br>2024-02-11

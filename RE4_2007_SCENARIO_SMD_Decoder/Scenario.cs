@@ -35,8 +35,9 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         public static void CreateOBJ(SMDLine[] smdLines, PMD_API.PMD[] pmds, string baseDiretory, string baseFileName, bool UseColorsInObjFile) 
         {
             StreamWriter obj = new StreamWriter(baseDiretory + baseFileName + ".obj", false);
-            obj.WriteLine("##RE4_2007_SCENARIO_SMD_Extractor##");
-            obj.WriteLine($"##Version {Program.VERSION}##");
+            obj.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
+            obj.WriteLine("# By JADERLINK");
+            obj.WriteLine($"# Version {Program.VERSION}");
             obj.WriteLine("");
 
             obj.WriteLine("mtllib " + baseFileName + ".mtl");
@@ -60,8 +61,9 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         public static void CreateMTL(PMD_API.PMD[] pmds, string baseDiretory, string baseFileName) 
         {
             StreamWriter MTLtext = new FileInfo(baseDiretory + baseFileName + ".mtl").CreateText();
-            MTLtext.WriteLine("##RE4_2007_SCENARIO_SMD_Extractor##");
-            MTLtext.WriteLine($"##Version {Program.VERSION}##");
+            MTLtext.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
+            MTLtext.WriteLine("# By JADERLINK");
+            MTLtext.WriteLine($"# Version {Program.VERSION}");
             MTLtext.WriteLine("");
 
             HashSet<string> materialNames = new HashSet<string>();
@@ -150,10 +152,19 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
                             }
                             obj.WriteLine(v);
 
-                            obj.WriteLine("vn " + pmd.Nodes[g].Meshs[im].Vertexs[iv].nx.ToString("f9", CultureInfo.InvariantCulture)
-                               + " " + pmd.Nodes[g].Meshs[im].Vertexs[iv].ny.ToString("f9", CultureInfo.InvariantCulture)
-                               + " " + pmd.Nodes[g].Meshs[im].Vertexs[iv].nz.ToString("f9", CultureInfo.InvariantCulture)
-                               );
+                            float[] normal = new float[3];// 0 = x, 1 = y, 2 = z
+                            normal[0] = pmd.Nodes[g].Meshs[im].Vertexs[iv].nx;
+                            normal[1] = pmd.Nodes[g].Meshs[im].Vertexs[iv].ny;
+                            normal[2] = pmd.Nodes[g].Meshs[im].Vertexs[iv].nz;
+
+                            normal = RotationUtils.RotationInX(normal, smdLine.angleX);
+                            normal = RotationUtils.RotationInY(normal, smdLine.angleY);
+                            normal = RotationUtils.RotationInZ(normal, smdLine.angleZ);
+
+                            obj.WriteLine("vn " + 
+                                (normal[0]).ToString("f9", CultureInfo.InvariantCulture)+ " " + 
+                                (normal[1]).ToString("f9", CultureInfo.InvariantCulture)+ " " + 
+                                (normal[2]).ToString("f9", CultureInfo.InvariantCulture));
 
                             obj.WriteLine("vt " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].tu).ToString("f9", CultureInfo.InvariantCulture)
                               + " " + ((pmd.Nodes[g].Meshs[im].Vertexs[iv].tv - 1) * -1).ToString("f9", CultureInfo.InvariantCulture)
@@ -185,8 +196,9 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         {
             //
             TextWriter text = new FileInfo(baseDiretory + baseFileName + ".DrawDistance.obj").CreateText();
-            text.WriteLine("##RE4_2007_SCENARIO_SMD_Extractor##");
-            text.WriteLine($"##Version {Program.VERSION}##");
+            text.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
+            text.WriteLine("# By JADERLINK");
+            text.WriteLine($"# Version {Program.VERSION}");
             text.WriteLine("");
             int index = 0;
 
@@ -259,8 +271,9 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         {
             //
             TextWriter text = new FileInfo(baseDiretory + baseFileName + ".idxscenario").CreateText();
-            text.WriteLine("##RE4_2007_SCENARIO_SMD_Extractor##");
-            text.WriteLine($"##Version {Program.VERSION}##");
+            text.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
+            text.WriteLine("# By JADERLINK");
+            text.WriteLine($"# Version {Program.VERSION}");
             text.WriteLine("");
 
             text.WriteLine("SmdAmount:" + smdLines.Length);
