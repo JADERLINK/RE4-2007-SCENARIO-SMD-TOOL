@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace RE4_2007_SCENARIO_SMD_Extractor
+namespace RE4_2007_SCENARIO_SMD_EXTRACT
 {
     public static class SmdExtract
     {

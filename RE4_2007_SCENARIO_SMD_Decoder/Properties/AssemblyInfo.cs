@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associadas a um assembly.
-[assembly: AssemblyTitle("RE4_2007_SCENARIO_SMD_Decoder")]
-[assembly: AssemblyDescription("JADERLINK")]
+[assembly: AssemblyTitle("RE4_2007_SCENARIO_SMD_EXTRACT")]
+[assembly: AssemblyDescription("RE4_2007_SCENARIO_SMD_EXTRACT By JADERLINK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("RE4_2007_SCENARIO_SMD_Decoder")]
-[assembly: AssemblyProduct("RE4_2007_SCENARIO_SMD_Decoder")]
-[assembly: AssemblyCopyright("Copyright © JADERLINK 2023")]
+[assembly: AssemblyCompany("JADERLINK")]
+[assembly: AssemblyProduct("RE4_2007_SCENARIO_SMD_EXTRACT")]
+[assembly: AssemblyCopyright("Copyright © JADERLINK 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

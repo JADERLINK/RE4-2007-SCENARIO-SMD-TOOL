@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace RE4_PMD_Repack
+namespace RE4_2007_PMD_REPACK
 {
-    public static partial class PMDrepack
+    public static class PMDrepackFinal
     {
-
-        private static FinalStructure MakeFinalStructure(IntermediaryStructure intermediaryStructure, IntermediaryNodeGroup[] nodeGroups, bool isScenarioPmd)
+        public static FinalStructure MakeFinalStructure(IntermediaryStructure intermediaryStructure, IntermediaryNodeGroup[] nodeGroups, bool isScenarioPmd)
         {
             FinalStructure finalStructure = new FinalStructure();
 
@@ -19,7 +18,7 @@ namespace RE4_PMD_Repack
             Dictionary<string, string> Dic_MaterialName_NodeName = new Dictionary<string, string>();
             Dictionary<string, int> Dic_NodeName_SkeletonIndex = new Dictionary<string, int>();
 
-            //faz as lista de define o SkeletonIndex de cada node
+            //faz as lista que define o SkeletonIndex de cada node
             //e define qual material é de qual node.
             for (int i = 0; i < meshMaterial.Length; i++)
             {
@@ -173,12 +172,23 @@ namespace RE4_PMD_Repack
                 nodes[nodeName] = node;
             }
 
+            //ordenação
+            nodes = (from obj in nodes
+                    orderby obj.Key
+                    orderby obj.Value.SkeletonIndex
+                    select obj).ToDictionary(k => k.Key, v => v.Value);
+            foreach (var node in nodes) 
+            {
+                node.Value.Meshs = (from mesh in node.Value.Meshs
+                                   orderby mesh.MaterialName
+                                   select mesh).ToArray();
+            }
 
             finalStructure.Nodes = nodes;
             return finalStructure;
         }
 
-        private static void MakeFinalPmdFile(string pmdPath, FinalStructure finalStructure, FinalBoneLine[] boneLines, Dictionary<string, FinalMaterialLine> UseMaterial)
+        public static void MakeFinalPmdFile(string pmdPath, FinalStructure finalStructure, FinalBoneLine[] boneLines, Dictionary<string, FinalMaterialLine> UseMaterial)
         {
             // arruma indices dos materiais
             List<string> materialIndex = new List<string>();
@@ -422,7 +432,7 @@ namespace RE4_PMD_Repack
 
                 pmd.Write(floatsData, 0, floatsData.Length);
 
-                byte[] TextureUnknownBytes = BitConverter.GetBytes(material.TextureUnknown);
+                byte[] TextureUnknownBytes = BitConverter.GetBytes(material.TextureEnable);
                 pmd.Write(TextureUnknownBytes, 0, TextureUnknownBytes.Length);
 
                 int nameLength = material.TextureName.Length;

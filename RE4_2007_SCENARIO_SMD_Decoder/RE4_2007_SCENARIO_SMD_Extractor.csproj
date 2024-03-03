@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F2084D3C-BE2C-4C19-8066-4656B00E5799}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RE4_2007_SCENARIO_SMD_Extractor</RootNamespace>
-    <AssemblyName>RE4_2007_SCENARIO_SMD_Extractor</AssemblyName>
+    <RootNamespace>RE4_2007_SCENARIO_SMD_EXTRACT</RootNamespace>
+    <AssemblyName>RE4_2007_SCENARIO_SMD_EXTRACT</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RE4_2007_SCENARIO_SMD_Extractor.Program</StartupObject>
+    <StartupObject>RE4_2007_SCENARIO_SMD_EXTRACT.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -50,12 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PMD.cs" />
-    <Compile Include="PmdDecoder.cs" />
+    <Compile Include="EXTRACT\MaterialParser.cs" />
+    <Compile Include="EXTRACT\OutputIdxPmdMaterial.cs" />
+    <Compile Include="EXTRACT\OutputMtl.cs" />
+    <Compile Include="EXTRACT\PMD.cs" />
+    <Compile Include="EXTRACT\PmdDecoder.cs" />
+    <Compile Include="EXTRACT\PmdMaterialPart.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenario.cs" />
-    <Compile Include="SmdExtract.cs" />
+    <Compile Include="SCENARIO\RotationUtils.cs" />
+    <Compile Include="SCENARIO\Scenario.cs" />
+    <Compile Include="SCENARIO\SmdExtract.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

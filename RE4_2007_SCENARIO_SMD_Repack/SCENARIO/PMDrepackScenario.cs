@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RE4_2007_SCENARIO_SMD_Repack;
+using RE4_2007_PMD_REPACK;
 
-namespace RE4_PMD_Repack
+namespace RE4_2007_SCENARIO_SMD_REPACK
 {
-    public static partial class PMDrepack
+    public static class PMDrepackScenario
     {
         public static void CreateScenarioPMD(string pmdPath, 
             StartStructure startStructure, 
@@ -18,16 +18,14 @@ namespace RE4_PMD_Repack
             ) 
         {
             // estrutura intermediaria
-            IntermediaryStructure intermediaryStructure = MakeIntermediaryStructure(startStructure, smdLine);
+            IntermediaryStructure intermediaryStructure = PMDrepackIntermediary.MakeIntermediaryStructure(startStructure, smdLine);
 
             // estrutura final
-            FinalStructure finalStructure = MakeFinalStructure(intermediaryStructure, new IntermediaryNodeGroup[] { intermediaryNodeGroup }, true);
+            FinalStructure finalStructure = PMDrepackFinal.MakeFinalStructure(intermediaryStructure, new IntermediaryNodeGroup[] { intermediaryNodeGroup }, true);
 
             //finaliza e cria o arquivo pmd
-            MakeFinalPmdFile(pmdPath, finalStructure, new FinalBoneLine[] { boneLine }, UseMaterial);
+            PMDrepackFinal.MakeFinalPmdFile(pmdPath, finalStructure, new FinalBoneLine[] { boneLine }, UseMaterial);
         }
-
-
 
     }
 }

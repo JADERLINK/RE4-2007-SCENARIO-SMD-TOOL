@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3D4DDC7E-4EF2-482C-B084-4C19EB276A6A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RE4_2007_SCENARIO_SMD_Repack</RootNamespace>
-    <AssemblyName>RE4_2007_SCENARIO_SMD_Repack</AssemblyName>
+    <RootNamespace>RE4_2007_SCENARIO_SMD_REPACK</RootNamespace>
+    <AssemblyName>RE4_2007_SCENARIO_SMD_REPACK</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,6 +36,9 @@
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RE4_2007_SCENARIO_SMD_REPACK.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,31 +50,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdxScenarioLoader.cs" />
-    <Compile Include="InternalFiles.cs" />
-    <Compile Include="PMDrepack.cs" />
-    <Compile Include="PMDrepackFinal.cs" />
-    <Compile Include="PMDrepackIntermediary.cs" />
-    <Compile Include="PMDrepackScenario.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RotationUtils.cs" />
-    <Compile Include="ScenarioRepack.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Data\DataStore\IGroupNameDataStore.cs" />
+    <Compile Include="CjClutter.ObjLoader.Loader\Data\DataStore\ILineGroup.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Data\DataStore\IMaterialDataStore.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Data\DataStore\IMaterialNameDataStore.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Data\DataStore\IMtlLibDataStore.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Data\DataStore\IObjectNameDataStore.cs" />
+    <Compile Include="CjClutter.ObjLoader.Loader\Data\Elements\Line.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Loaders\IMtlLoader.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Loaders\IMtlLoaderFactory.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Loaders\MtlLoader.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\Loaders\MtlLoaderFactory.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\GroupNameParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\Interfaces\IGroupNameParser.cs" />
+    <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\Interfaces\ILineParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\Interfaces\IMaterialNameParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\Interfaces\IMaterialParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\Interfaces\IMtlLibParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\Interfaces\IObjectNameParser.cs" />
+    <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\LineParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\MaterialNameParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\MaterialParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\MtlLibParser.cs" />
@@ -106,11 +103,22 @@
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\TextureParser.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\TypeParserBase.cs" />
     <Compile Include="CjClutter.ObjLoader.Loader\TypeParsers\VertexParser.cs" />
-    <Compile Include="SmdBaseLine.cs" />
+    <Compile Include="SCENARIO\IdxPmdMaterialLoader.cs" />
+    <Compile Include="SCENARIO\IdxScenarioLoader.cs" />
+    <Compile Include="SCENARIO\InternalFiles.cs" />
+    <Compile Include="SCENARIO\PMDrepackFinal.cs" />
+    <Compile Include="SCENARIO\PMDrepackIntermediary.cs" />
+    <Compile Include="SCENARIO\PMDrepackMat.cs" />
+    <Compile Include="SCENARIO\PMDrepackScenario.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SCENARIO\RotationUtils.cs" />
+    <Compile Include="SCENARIO\ScenarioRepack.cs" />
+    <Compile Include="SCENARIO\SmdBaseLine.cs" />
     <Compile Include="Structures\FinalStructure.cs" />
     <Compile Include="Structures\IntermediaryStructure.cs" />
     <Compile Include="Structures\StartStructure.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="SCENARIO\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

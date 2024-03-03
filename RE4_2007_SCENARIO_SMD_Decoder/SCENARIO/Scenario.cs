@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Globalization;
 using System.IO;
 
-namespace RE4_2007_SCENARIO_SMD_Extractor
+namespace RE4_2007_SCENARIO_SMD_EXTRACT
 {
     public static class Scenario
     {
@@ -32,17 +32,13 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             return pmds;
         }
 
-        public static void CreateOBJ(SMDLine[] smdLines, PMD_API.PMD[] pmds, string baseDiretory, string baseFileName, bool UseColorsInObjFile) 
+        public static void CreateOBJ(SMDLine[] smdLines, PMD_API.PMD[] pmds, string[][] Materialref, string baseDiretory, string baseFileName, bool UseColorsInObjFile) 
         {
             StreamWriter obj = new StreamWriter(baseDiretory + baseFileName + ".obj", false);
-            obj.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
-            obj.WriteLine("# By JADERLINK");
-            obj.WriteLine($"# Version {Program.VERSION}");
+            obj.WriteLine(Program.HeaderText());
             obj.WriteLine("");
 
             obj.WriteLine("mtllib " + baseFileName + ".mtl");
-
-            //obj.WriteLine("o " + "OBJ_SCENARIO#");
 
             uint indexCount = 0;
 
@@ -50,7 +46,7 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             {
                 if (pmds[i] != null)
                 {
-                    ObjCreatePart(i, obj, pmds[i], smdLines[i], ref indexCount, UseColorsInObjFile);
+                    ObjCreatePart(i, obj, pmds[i], smdLines[i], Materialref, ref indexCount, UseColorsInObjFile);
                 }
                 
             }
@@ -58,52 +54,8 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             obj.Close();
         }
 
-        public static void CreateMTL(PMD_API.PMD[] pmds, string baseDiretory, string baseFileName) 
-        {
-            StreamWriter MTLtext = new FileInfo(baseDiretory + baseFileName + ".mtl").CreateText();
-            MTLtext.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
-            MTLtext.WriteLine("# By JADERLINK");
-            MTLtext.WriteLine($"# Version {Program.VERSION}");
-            MTLtext.WriteLine("");
 
-            HashSet<string> materialNames = new HashSet<string>();
-            for (int ip = 0; ip < pmds.Length; ip++)
-            {
-                var pmd = pmds[ip];
-
-                for (int i = 0; i < pmd.Materials.Length; i++)
-                {
-                    string TextureName = pmd.Materials[i].TextureName;
-                    if (TextureName == null || TextureName.Length == 0)
-                    {
-                        TextureName = "PMD_MATERIAL_NULL.tga";
-                    }
-
-                    if (!materialNames.Contains(TextureName))
-                    {
-
-                        MTLtext.WriteLine("");
-                        MTLtext.WriteLine("newmtl " + TextureName);
-                        MTLtext.WriteLine("Ka 1.000 1.000 1.000");
-                        MTLtext.WriteLine("Kd 1.000 1.000 1.000");
-                        MTLtext.WriteLine("Ks 0.000 0.000 0.000");
-                        MTLtext.WriteLine("Ns 0");
-                        MTLtext.WriteLine("d 1");
-                        MTLtext.WriteLine("Tr 1");
-                        MTLtext.WriteLine("map_Kd " + TextureName);
-                        MTLtext.WriteLine("");
-
-                        materialNames.Add(TextureName);
-                    }
-                }
-            }
-
-      
-            MTLtext.Close();
-        }
-
-
-        private static void ObjCreatePart(int ID, StreamWriter obj, PMD_API.PMD pmd, SMDLine smdLine, ref uint indexCount, bool UseColorsInObjFile)
+        private static void ObjCreatePart(int ID, StreamWriter obj, PMD_API.PMD pmd, SMDLine smdLine, string[][] Materialref, ref uint indexCount, bool UseColorsInObjFile)
         {
             
             obj.WriteLine("g " + "SCENARIO#PMD_" + ID.ToString("D3") + "#SMX_" + smdLine.SmxID.ToString("D3") + "#TYPE_" + smdLine.objectStatus.ToString("X2") + "#");
@@ -114,15 +66,8 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
                 for (int im = 0; im < pmd.Nodes[g].Meshs.Length; im++)
                 {
                     if (pmd.Nodes[g].Meshs[im].Orders.Length != 0)
-                    {
-                        
-                            string TextureName = pmd.Materials[pmd.Nodes[g].Meshs[im].TextureIndex].TextureName;
-                            if (TextureName == null || TextureName.Length == 0)
-                            {
-                                TextureName = "PMD_MATERIAL_NULL.tga";
-                            }
-                            obj.WriteLine("usemtl " + TextureName);
-               
+                    {                      
+                        obj.WriteLine("usemtl " + Materialref[ID][pmd.Nodes[g].Meshs[im].TextureIndex]);
 
                         for (int iv = 0; iv < pmd.Nodes[g].Meshs[im].Vertexs.Length; iv++)
                         {
@@ -196,13 +141,10 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         {
             //
             TextWriter text = new FileInfo(baseDiretory + baseFileName + ".DrawDistance.obj").CreateText();
-            text.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
-            text.WriteLine("# By JADERLINK");
-            text.WriteLine($"# Version {Program.VERSION}");
+            text.WriteLine(Program.HeaderText());
             text.WriteLine("");
             int index = 0;
 
-            //text.WriteLine("o " + "OBJ_DRAWDISTANCE#");
 
             for (int i = 0; i < smdLine.Length; i++)
             {
@@ -271,14 +213,14 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         {
             //
             TextWriter text = new FileInfo(baseDiretory + baseFileName + ".idxscenario").CreateText();
-            text.WriteLine("# RE4_2007_SCENARIO_SMD_Extractor");
-            text.WriteLine("# By JADERLINK");
-            text.WriteLine($"# Version {Program.VERSION}");
+            text.WriteLine("# youtube.com/@JADERLINK");
+            text.WriteLine(Program.HeaderText());
             text.WriteLine("");
 
             text.WriteLine("SmdAmount:" + smdLines.Length);
             text.WriteLine("SmdFileName:" + SmdFileName);
             text.WriteLine("PmdBaseName:" + PmdFilesName);
+            text.WriteLine("UseIdxPmdMaterial:" + false.ToString());
 
             text.WriteLine("");
             for (int i = 0; i < smdLines.Length; i++)
@@ -321,7 +263,6 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         }
 
 
-        // a remover no futuro
         private static void CreateIdxScenario_DrawDistance(int id, ref TextWriter text, SMDLine smdLine, BinRenderBox box) 
         {
             float[] pos1 = new float[3];// 0 = x, 1 = y, 2 = z
@@ -359,10 +300,6 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             string DrawDistancePositiveY = (pos2[1]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
             string DrawDistancePositiveZ = (pos2[2]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
 
-
-            //text.WriteLine("v " + DrawDistanceNegativeX + " " + DrawDistanceNegativeY + " " + DrawDistanceNegativeZ);
-            //text.WriteLine("v " + DrawDistancePositiveX + " " + DrawDistancePositiveY + " " + DrawDistancePositiveZ);
-
             text.WriteLine(id.ToString("D3") + "_DrawDistanceNegativeX:" + DrawDistanceNegativeX);
             text.WriteLine(id.ToString("D3") + "_DrawDistanceNegativeY:" + DrawDistanceNegativeY);
             text.WriteLine(id.ToString("D3") + "_DrawDistanceNegativeZ:" + DrawDistanceNegativeZ);
@@ -375,39 +312,107 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
         }
 
 
+        public static void CreateSMDmodelReference(SMDLine[] SMDLines, string baseDiretory, string smdFileName)
+        {
+            var inv = System.Globalization.CultureInfo.InvariantCulture;
+
+            TextWriter text = new FileInfo(baseDiretory + smdFileName + ".reference.smd").CreateText();
+            text.WriteLine("version 1");
+            text.WriteLine("nodes");
+
+            for (int i = 0; i < SMDLines.Length; i++)
+            {
+                text.WriteLine(i + " \"PMD_" + i.ToString("D3") + "\" -1");
+            }
+            text.WriteLine(SMDLines.Length + " \"Center\" -1");
+            text.WriteLine("end");
+
+            text.WriteLine("skeleton");
+            text.WriteLine("time 0");
+
+            for (int i = 0; i < SMDLines.Length; i++)
+            {
+                text.WriteLine(i +
+                   " " + (SMDLines[i].positionX / 100f).ToString("F9", inv) +
+                   " " + (SMDLines[i].positionZ / 100f * -1).ToString("F9", inv) +
+                   " " + (SMDLines[i].positionY / 100f).ToString("F9", inv) +
+                   " " + SMDLines[i].angleX.ToString("F9", inv) +
+                   " " + SMDLines[i].angleZ.ToString("F9", inv) +
+                   " " + SMDLines[i].angleY.ToString("F9", inv)
+                   );
+            }
+            text.WriteLine(SMDLines.Length + " 0.0000000 0.000000 0.000000 0.0000000 0.000000 0.000000"); //center
+
+            text.WriteLine("end");
+
+            text.WriteLine("triangles");
+
+            for (int i = 0; i < SMDLines.Length; i++)
+            {
+                float[] pos1 = new float[3]; // 0 = x, 1 = y, 2 = z
+                //XYZ
+                pos1[0] = SMDLines[i].positionX / 100f;
+                pos1[1] = SMDLines[i].positionY / 100f;
+                pos1[2] = SMDLines[i].positionZ / 100f;
+
+                //--------
+                float[] pos2 = new float[3]; // 0 = x, 1 = y, 2 = z
+
+                pos2[0] = 0;
+                pos2[1] = -1000;
+                pos2[2] = 1000;
+
+                //XYZ
+
+                pos2 = RotationUtils.RotationInX(pos2, SMDLines[i].angleX);
+                pos2 = RotationUtils.RotationInY(pos2, SMDLines[i].angleY);
+                pos2 = RotationUtils.RotationInZ(pos2, SMDLines[i].angleZ);
+
+                pos2[0] = ((pos2[0] * SMDLines[i].scaleX) + SMDLines[i].positionX) / 100f;
+                pos2[1] = ((pos2[1] * SMDLines[i].scaleY) + SMDLines[i].positionY) / 100f;
+                pos2[2] = ((pos2[2] * SMDLines[i].scaleZ) + SMDLines[i].positionZ) / 100f;
+
+                //----
+                float[] pos3 = new float[3]; // 0 = x, 1 = y, 2 = z
+
+                pos3[0] = 0;
+                pos3[1] = -1000;
+                pos3[2] = -1000;
+
+                //XYZ
+
+                pos3 = RotationUtils.RotationInX(pos3, SMDLines[i].angleX);
+                pos3 = RotationUtils.RotationInY(pos3, SMDLines[i].angleY);
+                pos3 = RotationUtils.RotationInZ(pos3, SMDLines[i].angleZ);
+
+                pos3[0] = ((pos3[0] * SMDLines[i].scaleX) + SMDLines[i].positionX) / 100f;
+                pos3[1] = ((pos3[1] * SMDLines[i].scaleY) + SMDLines[i].positionY) / 100f;
+                pos3[2] = ((pos3[2] * SMDLines[i].scaleZ) + SMDLines[i].positionZ) / 100f;
+
+                //----------
+
+                text.WriteLine("NOMATERIAL");
+                text.WriteLine(i.ToString() + " " + (pos1[0]).ToString("F9", inv) + " " + (pos1[2] * -1).ToString("F9", inv) + " " + (pos1[1]).ToString("F9", inv) + " 0 0 0 0 0 0");
+                text.WriteLine(i.ToString() + " " + (pos2[0]).ToString("F9", inv) + " " + (pos2[2] * -1).ToString("F9", inv) + " " + (pos2[1]).ToString("F9", inv) + " 0 0 0 0 0 0");
+                text.WriteLine(i.ToString() + " " + (pos3[0]).ToString("F9", inv) + " " + (pos3[2] * -1).ToString("F9", inv) + " " + (pos3[1]).ToString("F9", inv) + " 0 0 0 0 0 0");
+            }
+
+            // center
+            text.WriteLine("NOMATERIAL");
+            text.WriteLine(SMDLines.Length + " 0 0 0 0 0 0 0 0 0");
+            text.WriteLine(SMDLines.Length + " 0 10 -10 0 0 0 0 0 0");
+            text.WriteLine(SMDLines.Length + " 0 -10 -10 0 0 0 0 0 0");
+
+            text.WriteLine("end");
+            text.Write("// github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL" + Environment.NewLine
+                + "// RE4_2007_SCENARIO_SMD_TOOL By JADERLINK" + Environment.NewLine
+                + $"// Version {Program.VERSION}");
+
+            text.Close();
+        }
+
 
     }
 
-    public static class RotationUtils
-    {
-        //pos = x, y, z
-
-        public static float[] RotationInX(float[] pos, float angleInRadian)
-        {
-            float[] res = new float[3];
-            res[0] = pos[0];
-            res[1] = (float)(Math.Cos(angleInRadian) * pos[1] - Math.Sin(angleInRadian) * pos[2]);
-            res[2] = (float)(Math.Sin(angleInRadian) * pos[1] + Math.Cos(angleInRadian) * pos[2]);
-            return res;
-        }
-
-        public static float[] RotationInY(float[] pos, float angleInRadian)
-        {
-            float[] res = new float[3];
-            res[0] = (float)(Math.Cos(angleInRadian) * pos[0] + Math.Sin(angleInRadian) * pos[2]);
-            res[1] = pos[1];
-            res[2] = (float)(-1 * Math.Sin(angleInRadian) * pos[0] + Math.Cos(angleInRadian) * pos[2]);
-            return res;
-        }
-
-        public static float[] RotationInZ(float[] pos, float angleInRadian)
-        {
-            float[] res = new float[3];
-            res[0] = (float)(Math.Cos(angleInRadian) * pos[0] - Math.Sin(angleInRadian) * pos[1]);
-            res[1] = (float)(Math.Sin(angleInRadian) * pos[0] + Math.Cos(angleInRadian) * pos[1]);
-            res[2] = pos[2];
-            return res;
-        }
-
-    }
+  
 }

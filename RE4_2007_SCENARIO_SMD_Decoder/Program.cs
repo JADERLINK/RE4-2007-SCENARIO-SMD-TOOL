@@ -5,17 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace RE4_2007_SCENARIO_SMD_Extractor
+namespace RE4_2007_SCENARIO_SMD_EXTRACT
 {
     class Program
     {
-        public static string VERSION = "B.1.0.0.2 (2024-02-11)";
+        public static string VERSION = "B.1.0.1.2 (2024-03-03)";
+
+        public static string HeaderText()
+        {
+            return "# github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL" + Environment.NewLine
+                + "# RE4_2007_SCENARIO_SMD_TOOL By JADERLINK" + Environment.NewLine
+                + $"# Version {VERSION}";
+        }
 
         static void Main(string[] args)
         {
-            Console.WriteLine("## RE4_2007_SCENARIO_SMD_Extractor ##");
-            Console.WriteLine($"## Version {VERSION} ##");
-            Console.WriteLine("## By JADERLINK ##");
+            Console.WriteLine("# github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL");
+            Console.WriteLine("# youtube.com/@JADERLINK");
+            Console.WriteLine("# RE4_2007_SCENARIO_SMD_TOOL (EXTRACT) By JADERLINK");
+            Console.WriteLine($"# Version {VERSION}");
 
             //args[0] = SMD file
             //args[1] = Diretory for PMD files
@@ -25,6 +33,8 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
             {
                 Console.WriteLine("For more information read:");
                 Console.WriteLine("https://github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL");
+                Console.WriteLine("Press any key to close the console.");
+                Console.ReadKey();
             }
             else if (args.Length >= 3
                 && File.Exists(args[0])
@@ -60,12 +70,20 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
 
                         var pmds = Scenario.GetPmds(Diretory, basePmdName, SMDLines.Length);
 
-                        Scenario.CreateOBJ(SMDLines, pmds, Diretory, baseFileName, true);
+                        string[][] Materialref = null;
 
-                        Scenario.CreateMTL(pmds, Diretory, baseFileName);
+                        var materials = MaterialParser.Parser(pmds, out Materialref);
+
+                        OutputMtl.MtlCreate(materials, Diretory, baseFileName);
+
+                        OutputIdxPmdMaterial.IdxPmdMaterialCreate(materials, Diretory, baseFileName);
+
+                        Scenario.CreateOBJ(SMDLines, pmds, Materialref, Diretory, baseFileName, true);
+
+                        Scenario.CreateIdxScenario(SMDLines, pmds, Diretory, baseFileName, fileInfo.Name, basePmdName, renderBoxes);
 
                         Scenario.CreateDrawDistanceObj(SMDLines, renderBoxes, Diretory, baseFileName);
-                        Scenario.CreateIdxScenario(SMDLines, pmds, Diretory, baseFileName, fileInfo.Name, basePmdName, renderBoxes);
+                        Scenario.CreateSMDmodelReference(SMDLines, Diretory, baseFileName);
 
 
                     }
@@ -85,7 +103,7 @@ namespace RE4_2007_SCENARIO_SMD_Extractor
                 Console.WriteLine("Invalid arguments or invalid file");
             }
 
-            Console.WriteLine("end");
+            Console.WriteLine("End");
         }
     }
 }

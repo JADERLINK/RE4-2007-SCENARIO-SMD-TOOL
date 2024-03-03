@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RE4_2007_SCENARIO_SMD_Repack
+namespace RE4_2007_SCENARIO_SMD_EXTRACT
 {
     public static class RotationUtils
     {

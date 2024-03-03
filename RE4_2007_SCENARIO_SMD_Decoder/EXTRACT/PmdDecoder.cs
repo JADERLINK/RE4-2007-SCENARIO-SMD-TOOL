@@ -7,6 +7,7 @@ using System.IO;
 
 namespace PMD_API
 {
+    // Code Version: B.1.0.1.2
     public static class PmdDecoder
     {
         public static PMD GetPMD(string FilePath) 
@@ -257,7 +258,7 @@ namespace PMD_API
                     Materials[i].TextureData[f] = BitConverter.ToSingle(temp, offset);
                     offset += 4;
                 }
-                Materials[i].TextureUnknown = BitConverter.ToInt32(temp, offset);
+                Materials[i].TextureEnable = BitConverter.ToInt32(temp, offset);
 
 
                 temp = new byte[4];

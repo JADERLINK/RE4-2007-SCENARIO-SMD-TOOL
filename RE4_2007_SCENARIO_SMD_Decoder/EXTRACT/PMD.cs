@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace PMD_API
 {
+    // Code Version: B.1.0.1.2
+
     public class PMD
     {
         public string[] NodeGroupNames;
@@ -21,9 +23,9 @@ namespace PMD_API
 
     public class PMDmaterial 
     {
-        public string TextureName;
         public float[] TextureData;
-        public int TextureUnknown;
+        public int TextureEnable;
+        public string TextureName;
     }
 
     public class PMDnode 

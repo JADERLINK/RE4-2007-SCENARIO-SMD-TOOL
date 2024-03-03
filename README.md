@@ -5,6 +5,10 @@ Translate from Portuguese Brazil
 
 Programas destinados a extrair e recompactar os cenários usando somente um arquivo .OBJ
 
+## Update B.1.0.1.2
+Update de melhorias, agora será criado também o arquivo .idxpmdmaterial, que é responsável por editar os conteúdos do material/textura;
+<br>agora, ao fazer repack a ordem das meches é definida pelo nome do material/grupo;
+
 ## Update B.1.0.0.2
 Corrigido bug no qual não era rotacionado as normals dos modelos que têm rotação,
 então, caso esteja usando um .obj de versões anteriores, recalcule as normals;
@@ -14,21 +18,23 @@ Adicionado compatibilidade com outros editores 3D que não suportam caracteres e
 <br> Adicionado também uma verificação no nome dos grupos, então caso esteja errado o nome, o programa avisa-rá;
 <br> Os arquivos da versão anterior são compatíveis com essa versão;
 
- ## RE4_2007_SCENARIO_SMD_Extractor.exe
+ ## RE4_2007_SCENARIO_SMD_EXTRACT.exe
 
 Programa destinado para extrair o cenário, em um arquivo bat use o seguinte comando:
 <br>Extract Scenario:
-<br>RE4_2007_SCENARIO_SMD_Extractor.exe ".smd File patch" "Pmds Files folder" "Pmd base name"
+<br>RE4_2007_SCENARIO_SMD_EXTRACT.exe ".smd File patch" "Pmds Files folder" "Pmd base name"
 
 Exemplo:
-<br>RE4_2007_SCENARIO_SMD_Extractor.exe "D:\Games\Re4\st2\r209\r209_04.SMD" "D:\Games\Re4\xscr\r209" "r209"
+<br>RE4_2007_SCENARIO_SMD_EXTRACT.exe "D:\Games\Re4\st2\r209\r209_04.SMD" "D:\Games\Re4\xscr\r209" "r209"
 
 nesse exemplo será gerado os arquivos na pasta : D:\Games\Re4\xscr\r209
 
 * r209.scenario.idxscenario  // arquivo importante de configurações;
 * r209.scenario.obj // conteúdo de todo o cenário, esse é o arquivo que você vai editar;
 * r209.scenario.mtl // arquivo que acompanha o .obj;
+* r209.scenario.idxpmdmaterial // Arquivo alternativo para editar os materiais;
 * r209.scenario.DrawDistance.obj // arquivo informacional, mas não é utilizado no repack.
+* r209.scenario.reference.smd // arquivo informacional, mas não é utilizado no repack.
 
 **Sobre rXXX.scenario.obj**
 <br>Esse arquivo é onde esta todo o cenário, nele os arquivos PMD são reparados por grupos, no qual é nomenclatura deve ser respeitada:
@@ -61,7 +67,7 @@ Sendo:
 <br>Marque as caixas "Triangulated Mesh" e "Object Groups" e "Colors".
 <br> no arquivo .obj o nome dos grupos vão ficar com "_Mesh" no final do nome (por isso no editor termina o nome do grupo com # para evitar problemas)
 
-## RE4_2007_SCENARIO_SMD_Repack.exe
+## RE4_2007_SCENARIO_SMD_REPACK.exe
 Faz o repack do cenário, recebe como parâmetro o arquivo ".idxscenario", 
 <br>que no exemplo seria o arquivo "r209.scenario.idxscenario"
 <br>e na pasta deve ter os arquivos "r209.scenario.obj" e " r209.scenario.mtl"
@@ -76,6 +82,7 @@ Faz o repack do cenário, recebe como parâmetro o arquivo ".idxscenario",
 * SmdAmount:127 // representa a quantidade de entradas/arquivos Smd/Pmd (você pode mudar mas em alguns cenário pode esta crashando o jogo)
 * SmdFileName:r209_04.SMD // esse é o nome do arquivo Smd que será gerado
 * PmdBaseName:r209 // esse é o nome base para os arquivos Pmd
+* UseIdxPmdMaterial:False // Define se é usado o arquivo .idxpmdmaterial;
 * os outros comando que começam com números são auto descritivos (o numero é o ID do Pmd/Smd) (evite mexer nesses valores)
 
 ## DrawDistance
@@ -96,4 +103,4 @@ ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_positi
 Encontra-se no RE4_PMD_Repack, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
 
 **At.te: JADERLINK**
-<br>2024-02-11
+<br>2024-03-03

@@ -6,7 +6,7 @@ using ObjLoader.Loader.Data.VertexData;
 
 namespace ObjLoader.Loader.Data.DataStore
 {
-    public class DataStore : IDataStore, IFaceGroup, IVertexDataStore, ITextureDataStore, INormalDataStore, IMtlLibDataStore,
+    public class DataStore : IDataStore, IFaceGroup, ILineGroup, IVertexDataStore, ITextureDataStore, INormalDataStore, IMtlLibDataStore,
                              IGroupNameDataStore, IMaterialNameDataStore, IObjectNameDataStore
     {
         private string _lastGroupName = "default";
@@ -38,7 +38,7 @@ namespace ObjLoader.Loader.Data.DataStore
 
         public IList<Group> Groups
         {
-            get { return _groups.FindAll(g => g.Faces.Count != 0); }
+            get { return _groups.FindAll(g => g.Faces.Count != 0 || g.Lines.Count != 0); }
         }
 
         public IList<string> MtlLibs
@@ -49,8 +49,13 @@ namespace ObjLoader.Loader.Data.DataStore
         public void AddFace(Face face)
         {
             PushGroupIfNeeded();
-
             _currentGroup.AddFace(face);
+        }
+
+        public void AddLine(Line line)
+        {
+            PushGroupIfNeeded();
+            _currentGroup.AddLine(line);
         }
 
         private void PushGroupIfNeeded()
@@ -103,6 +108,8 @@ namespace ObjLoader.Loader.Data.DataStore
         {
            _mtlLibs.Add(mtlLib);
         }
+
+        
     }
 
 

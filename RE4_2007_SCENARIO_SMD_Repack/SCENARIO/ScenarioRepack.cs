@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RE4_PMD_Repack;
 using System.IO;
+using RE4_2007_PMD_REPACK;
 
-namespace RE4_2007_SCENARIO_SMD_Repack
+namespace RE4_2007_SCENARIO_SMD_REPACK
 {
     public static partial class ScenarioRepack
     {
-        public static void Repack(string objPath, string mtlPath, string idxpath, string diretory) 
+        public static void Repack(string objPath, string diretory, 
+            IdxScenario idxScenario,
+            Dictionary<string, PmdMaterialLine> idxMaterial,
+            ObjLoader.Loader.Data.Material[] MtlMaterials)
         {
             string patternSCENARIO = "^(SCENARIO#)(P|S)(MD_)([0]{0,})([0-9]{1,3})(#SMX_)([0]{0,})([0-9]{1,3})(#TYPE_)([0]{0,})([0-9|A-F]{1,8})(#).*$";
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(patternSCENARIO, System.Text.RegularExpressions.RegexOptions.CultureInvariant);
 
             bool LoadColorsFromObjFile = true;
-
-            var idxScenario = IdxScenarioLoader.Loader(new StreamReader(new FileInfo(idxpath).OpenRead(), Encoding.ASCII));
 
             // load .obj file
             var objLoaderFactory = new ObjLoader.Loader.Loaders.ObjLoaderFactory();
@@ -209,10 +210,9 @@ namespace RE4_2007_SCENARIO_SMD_Repack
             }
 
             //arruma o Material
-            var MtlMaterials = PMDrepack.LoadMtlMaterials(mtlPath, true);
-            var UseMaterial = PMDrepack.GetMaterials(ModelMaterials.ToArray(), MtlMaterials);
+            var UseMaterial = PMDrepackMat.GetMaterials(ModelMaterials.ToArray(), idxMaterial, MtlMaterials, true, idxScenario.UseIdxPmdMaterial);
 
-            PMDrepack.PrintTextureNamesInConsole(UseMaterial.Values.ToArray());
+            PMDrepackMat.PrintTextureNamesInConsole(UseMaterial.Values.ToArray());
 
             if (idxScenario.SmdAmount < maxPmd)
             {
@@ -255,13 +255,12 @@ namespace RE4_2007_SCENARIO_SMD_Repack
 
                 Console.WriteLine("Creating: " +idxScenario.PmdBaseName + "_" + item.Key.ToString("D3") + ".pmd");
 
-                PMDrepack.CreateScenarioPMD(pmdPath, item.Value, nodeGroup, GetFinalBoneLine(smdLineIdx), UseMaterial, smdLineIdx);
+                PMDrepackScenario.CreateScenarioPMD(pmdPath, item.Value, nodeGroup, GetFinalBoneLine(smdLineIdx), UseMaterial, smdLineIdx);
             }
 
 
             Console.WriteLine("Creating: " + idxScenario.SmdFileName);
             CreateSMD(diretory + idxScenario.SmdFileName, objGroupInfos, idxScenario);
-
 
             // end
         }
@@ -390,13 +389,13 @@ namespace RE4_2007_SCENARIO_SMD_Repack
 
                 //DrawDistance
 
-                float DrawDistanceNegativeX = -327670f;
-                float DrawDistanceNegativeY = -327670f;
-                float DrawDistanceNegativeZ = -327670f;
+                float DrawDistanceNegativeX = -640000f;
+                float DrawDistanceNegativeY = -640000f;
+                float DrawDistanceNegativeZ = -640000f;
 
-                float DrawDistancePositiveX = 327670f;
-                float DrawDistancePositiveY = 327670f;
-                float DrawDistancePositiveZ = 327670f;
+                float DrawDistancePositiveX = 320000f;
+                float DrawDistancePositiveY = 320000f;
+                float DrawDistancePositiveZ = 320000f;
 
                 if (idxScenario.BinRenderBoxes.Length > i && idxScenario.SmdLines.Length > i)
                 {

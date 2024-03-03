@@ -15,6 +15,7 @@ namespace ObjLoader.Loader.Loaders
         public ObjLoader(
             IDataStore dataStore,
             IFaceParser faceParser, 
+            ILineParser lineParser, 
             INormalParser normalParser, 
             ITextureParser textureParser, 
             IVertexParser vertexParser,
@@ -27,6 +28,7 @@ namespace ObjLoader.Loader.Loaders
             SetupTypeParsers(
                 vertexParser,
                 faceParser,
+                lineParser,
                 normalParser,
                 textureParser,
                 groupNameParser,

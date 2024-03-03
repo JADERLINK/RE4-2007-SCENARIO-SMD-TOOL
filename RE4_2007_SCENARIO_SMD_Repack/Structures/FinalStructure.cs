@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RE4_PMD_Repack
+namespace RE4_2007_PMD_REPACK
 {
     public class FinalStructure
     {
@@ -76,7 +76,7 @@ namespace RE4_PMD_Repack
     {
         public string TextureName { get; set; }
         public float[] TextureData { get; set; }
-        public int TextureUnknown { get; set; }
+        public int TextureEnable { get; set; }
     }
 
     public class FinalBoneLine

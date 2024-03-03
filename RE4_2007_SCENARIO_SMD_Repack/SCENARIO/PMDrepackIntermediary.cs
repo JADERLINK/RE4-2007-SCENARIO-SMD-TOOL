@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RE4_2007_SCENARIO_SMD_Repack;
+using RE4_2007_PMD_REPACK;
 
-namespace RE4_PMD_Repack
+namespace RE4_2007_SCENARIO_SMD_REPACK
 {
     // editado
-    public static partial class PMDrepack
+    public static class PMDrepackIntermediary
     {
-        private static IntermediaryStructure MakeIntermediaryStructure(StartStructure startStructure, SMDLineIdx smdLine)
+        public static IntermediaryStructure MakeIntermediaryStructure(StartStructure startStructure, SMDLineIdx smdLine)
         {
             IntermediaryStructure intermediary = new IntermediaryStructure();
 

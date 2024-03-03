@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RE4_PMD_Repack
+namespace RE4_2007_PMD_REPACK
 {
     public class IntermediaryStructure
     {

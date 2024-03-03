@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RE4_PMD_Repack
+namespace RE4_2007_PMD_REPACK
 {
 
     public class StartStructure
@@ -244,12 +244,11 @@ namespace RE4_PMD_Repack
 
         private StartFacesGroup CompressFacesOneMaterial(StartFacesGroup facesGroup) 
         {
-            TriOrder lastFirtOrder = TriOrder.order_1_2_3; //new TriOrder(1, 2, 3);
+            TriOrder lastFirtOrder = TriOrder.order_1_2_3;
 
             var Faces = facesGroup.Faces;
 
             
-
             List<StartTriangle> triangles = new List<StartTriangle>();
             for (int i = 0; i < Faces.Count; i++)
             {
@@ -300,11 +299,11 @@ namespace RE4_PMD_Repack
                         {
                             contLength++;
 
-                            TriOrder nextOrder = TriOrder.order_3_2_1;//new TriOrder(3, 2, 1);
+                            TriOrder nextOrder = TriOrder.order_3_2_1;
 
                             if (triangleAddedCount % 2 == 0 && !isFirt)
                             {
-                                nextOrder = TriOrder.order_1_2_3; //new TriOrder(1, 2, 3);
+                                nextOrder = TriOrder.order_1_2_3;
                             }
 
                             (int r1, int r2, int r3) Order1oldlast = (0, 0, 0);
@@ -653,8 +652,7 @@ namespace RE4_PMD_Repack
 
 
     /// <summary>
-    /// Represente um vertice, porem guarda somente os indices do valores;
-    /// <para>Aviso: os indices começam por 1</para>
+    /// Represente um vertex;
     /// </summary>
     public class StartVertex
     {
@@ -798,93 +796,6 @@ namespace RE4_PMD_Repack
         };
 
         public TriOrder() { }
-
-        #region TriOrder(int vertexIndex1, int vertexIndex2, int vertexIndex3)
-        /*
-        public TriOrder(int vertexIndex1, int vertexIndex2, int vertexIndex3)
-        {
-
-            op1 = (0, 0, 0);
-            op2 = (0, 0, 0);
-            op3 = (0, 0, 0);
-
-            //conjntos de faces
-            // faceA = 123, 231, 312
-            // faceB = 132, 213, 321
-
-            //123
-            // 1 < 2 && 1 < 3 && 2 < 3
-
-            //231
-            // 2 < 3 && 2 > 1 && 3 > 1
-
-            //312
-            // 3 > 1 && 3 > 2 && 1 < 2
-
-            //132
-            // 1 < 3 && 1 < 2 && 3 > 2
-
-            //213
-            // 2 > 1 && 2 < 3 && 1 < 3
-
-            //321
-            // 3 > 2 && 3 > 1 && 2 > 1
-
-            // nota: do jeito que foi feito se a entrada for 1, 2, 3 por exemplo todos serão true;
-            //bool check123 = vertexIndex1 < vertexIndex2 && vertexIndex1 < vertexIndex3 && vertexIndex2 < vertexIndex3;
-            //bool check231 = vertexIndex2 < vertexIndex3 && vertexIndex2 > vertexIndex1 && vertexIndex3 > vertexIndex1;
-            //bool check312 = vertexIndex3 > vertexIndex1 && vertexIndex3 > vertexIndex2 && vertexIndex1 < vertexIndex2;
-            //bool check132 = vertexIndex1 < vertexIndex3 && vertexIndex1 < vertexIndex2 && vertexIndex3 > vertexIndex2;
-            //bool check213 = vertexIndex2 > vertexIndex1 && vertexIndex2 < vertexIndex3 && vertexIndex1 < vertexIndex3;
-            //bool check321 = vertexIndex3 > vertexIndex2 && vertexIndex3 > vertexIndex1 && vertexIndex2 > vertexIndex1;
-
-            // verificação correta
-            bool check123 = vertexIndex1 < vertexIndex2 && vertexIndex1 < vertexIndex3 && vertexIndex2 < vertexIndex3;
-            bool check231 = vertexIndex1 < vertexIndex2 && vertexIndex1 > vertexIndex3 && vertexIndex2 > vertexIndex3;
-            bool check312 = vertexIndex1 > vertexIndex2 && vertexIndex1 > vertexIndex3 && vertexIndex2 < vertexIndex3;
-            bool check132 = vertexIndex1 < vertexIndex2 && vertexIndex1 < vertexIndex3 && vertexIndex2 > vertexIndex3;
-            bool check213 = vertexIndex1 > vertexIndex2 && vertexIndex1 < vertexIndex3 && vertexIndex2 < vertexIndex3;
-            bool check321 = vertexIndex1 > vertexIndex2 && vertexIndex1 > vertexIndex3 && vertexIndex2 > vertexIndex3;
-
-
-            if (check123 || check231 || check312)
-            {
-
-                op1.r1 = 1;
-                op1.r2 = 2;
-                op1.r3 = 3;
-
-                op2.r1 = 2;
-                op2.r2 = 3;
-                op2.r3 = 1;
-
-                op3.r1 = 3;
-                op3.r2 = 1;
-                op3.r3 = 2;
-
-            }
-            else if (check132 || check213 || check321)
-            {
-
-                op1.r1 = 1;
-                op1.r2 = 3;
-                op1.r3 = 2;
-
-                op2.r1 = 2;
-                op2.r2 = 1;
-                op2.r3 = 3;
-
-                op3.r1 = 3;
-                op3.r2 = 2;
-                op3.r3 = 1;
-
-            }
-
-
-        }
-        */
-        #endregion
-
     }
 
 }
