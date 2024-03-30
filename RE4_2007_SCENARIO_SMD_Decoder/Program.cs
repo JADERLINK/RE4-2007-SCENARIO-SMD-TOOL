@@ -9,7 +9,7 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
 {
     class Program
     {
-        public static string VERSION = "B.1.0.1.2 (2024-03-03)";
+        public static string VERSION = "B.1.0.13 (2024-03-30)";
 
         public static string HeaderText()
         {

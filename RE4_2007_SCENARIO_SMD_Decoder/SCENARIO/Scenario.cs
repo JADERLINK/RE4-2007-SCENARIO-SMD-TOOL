@@ -84,16 +84,16 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
                             pos[1] = ((pos[1] * pmd.SkeletonBoneData[0][1]) + (smdLine.positionY)) / 100f;
                             pos[2] = ((pos[2] * pmd.SkeletonBoneData[0][2]) + (smdLine.positionZ)) / 100f;
 
-                            string v = "v " + (pos[0]).ToString("f9", CultureInfo.InvariantCulture)
-                                      + " " + (pos[1]).ToString("f9", CultureInfo.InvariantCulture)
-                                      + " " + (pos[2]).ToString("f9", CultureInfo.InvariantCulture);
+                            string v = "v " + (pos[0]).ToFloatString()
+                                      + " " + (pos[1]).ToFloatString()
+                                      + " " + (pos[2]).ToFloatString();
 
                             if (UseColorsInObjFile)
                             {
-                                v += " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].r).ToString("f9", CultureInfo.InvariantCulture)
-                                   + " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].g).ToString("f9", CultureInfo.InvariantCulture)
-                                   + " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].b).ToString("f9", CultureInfo.InvariantCulture)
-                                   + " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].a).ToString("f9", CultureInfo.InvariantCulture);
+                                v += " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].r).ToFloatString()
+                                   + " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].g).ToFloatString()
+                                   + " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].b).ToFloatString()
+                                   + " " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].a).ToFloatString();
                             }
                             obj.WriteLine(v);
 
@@ -107,12 +107,12 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
                             normal = RotationUtils.RotationInZ(normal, smdLine.angleZ);
 
                             obj.WriteLine("vn " + 
-                                (normal[0]).ToString("f9", CultureInfo.InvariantCulture)+ " " + 
-                                (normal[1]).ToString("f9", CultureInfo.InvariantCulture)+ " " + 
-                                (normal[2]).ToString("f9", CultureInfo.InvariantCulture));
+                                (normal[0]).ToFloatString() + " " + 
+                                (normal[1]).ToFloatString() + " " + 
+                                (normal[2]).ToFloatString());
 
-                            obj.WriteLine("vt " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].tu).ToString("f9", CultureInfo.InvariantCulture)
-                              + " " + ((pmd.Nodes[g].Meshs[im].Vertexs[iv].tv - 1) * -1).ToString("f9", CultureInfo.InvariantCulture)
+                            obj.WriteLine("vt " + (pmd.Nodes[g].Meshs[im].Vertexs[iv].tu).ToFloatString()
+                              + " " + ((pmd.Nodes[g].Meshs[im].Vertexs[iv].tv - 1) * -1).ToFloatString()
                               );
                         }
 
@@ -186,13 +186,13 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
             pos2[1] = ((pos2[1] * smdLine.scaleY) + (smdLine.positionY)) / 100f;
             pos2[2] = ((pos2[2] * smdLine.scaleZ) + (smdLine.positionZ)) / 100f;
 
-            string DrawDistanceNegativeX = (pos1[0]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
-            string DrawDistanceNegativeY = (pos1[1]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
-            string DrawDistanceNegativeZ = (pos1[2]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
+            string DrawDistanceNegativeX = (pos1[0]).ToFloatString();
+            string DrawDistanceNegativeY = (pos1[1]).ToFloatString();
+            string DrawDistanceNegativeZ = (pos1[2]).ToFloatString();
 
-            string DrawDistancePositiveX = (pos2[0]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
-            string DrawDistancePositiveY = (pos2[1]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
-            string DrawDistancePositiveZ = (pos2[2]).ToString("f9", System.Globalization.CultureInfo.InvariantCulture);
+            string DrawDistancePositiveX = (pos2[0]).ToFloatString();
+            string DrawDistancePositiveY = (pos2[1]).ToFloatString();
+            string DrawDistancePositiveZ = (pos2[2]).ToFloatString();
 
 
             text.WriteLine("v " + DrawDistanceNegativeX + " " + DrawDistanceNegativeY + " " + DrawDistanceNegativeZ);
@@ -333,15 +333,15 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
             for (int i = 0; i < SMDLines.Length; i++)
             {
                 text.WriteLine(i +
-                   " " + (SMDLines[i].positionX / 100f).ToString("F9", inv) +
-                   " " + (SMDLines[i].positionZ / 100f * -1).ToString("F9", inv) +
-                   " " + (SMDLines[i].positionY / 100f).ToString("F9", inv) +
-                   " " + SMDLines[i].angleX.ToString("F9", inv) +
-                   " " + SMDLines[i].angleZ.ToString("F9", inv) +
-                   " " + SMDLines[i].angleY.ToString("F9", inv)
+                   " " + (SMDLines[i].positionX / 100f).ToFloatString() +
+                   " " + (SMDLines[i].positionZ / 100f * -1).ToFloatString() +
+                   " " + (SMDLines[i].positionY / 100f).ToFloatString() +
+                   " " + SMDLines[i].angleX.ToFloatString() +
+                   " " + SMDLines[i].angleZ.ToFloatString() +
+                   " " + SMDLines[i].angleY.ToFloatString()
                    );
             }
-            text.WriteLine(SMDLines.Length + " 0.0000000 0.000000 0.000000 0.0000000 0.000000 0.000000"); //center
+            text.WriteLine(SMDLines.Length + " 0.0 0.0 0.0 0.0 0.0 0.0"); //center
 
             text.WriteLine("end");
 
@@ -392,9 +392,9 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
                 //----------
 
                 text.WriteLine("NOMATERIAL");
-                text.WriteLine(i.ToString() + " " + (pos1[0]).ToString("F9", inv) + " " + (pos1[2] * -1).ToString("F9", inv) + " " + (pos1[1]).ToString("F9", inv) + " 0 0 0 0 0 0");
-                text.WriteLine(i.ToString() + " " + (pos2[0]).ToString("F9", inv) + " " + (pos2[2] * -1).ToString("F9", inv) + " " + (pos2[1]).ToString("F9", inv) + " 0 0 0 0 0 0");
-                text.WriteLine(i.ToString() + " " + (pos3[0]).ToString("F9", inv) + " " + (pos3[2] * -1).ToString("F9", inv) + " " + (pos3[1]).ToString("F9", inv) + " 0 0 0 0 0 0");
+                text.WriteLine(i.ToString() + " " + (pos1[0]).ToFloatString() + " " + (pos1[2] * -1).ToFloatString() + " " + (pos1[1]).ToFloatString() + " 0 0 0 0 0 0");
+                text.WriteLine(i.ToString() + " " + (pos2[0]).ToFloatString() + " " + (pos2[2] * -1).ToFloatString() + " " + (pos2[1]).ToFloatString() + " 0 0 0 0 0 0");
+                text.WriteLine(i.ToString() + " " + (pos3[0]).ToFloatString() + " " + (pos3[2] * -1).ToFloatString() + " " + (pos3[1]).ToFloatString() + " 0 0 0 0 0 0");
             }
 
             // center

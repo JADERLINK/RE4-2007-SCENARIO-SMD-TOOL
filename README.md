@@ -5,16 +5,21 @@ Translate from Portuguese Brazil
 
 Programas destinados a extrair e recompactar os cenários usando somente um arquivo .OBJ
 
-## Update B.1.0.1.2
-Update de melhorias, agora será criado também o arquivo .idxpmdmaterial, que é responsável por editar os conteúdos do material/textura;
+## Updates
+
+**Update B.1.0.13**
+<br>Agora, o programa, ao gerar o arquivo .obj, não terá mais os zeros não significativos dos números, mudança feita para gerar arquivos menores.
+
+**Update B.1.0.1.2**
+<br>Update de melhorias, agora será criado também o arquivo .idxpmdmaterial, que é responsável por editar os conteúdos do material/textura;
 <br>agora, ao fazer repack a ordem das meches é definida pelo nome do material/grupo;
 
-## Update B.1.0.0.2
-Corrigido bug no qual não era rotacionado as normals dos modelos que têm rotação,
+**Update B.1.0.0.2**
+<br>Corrigido bug no qual não era rotacionado as normals dos modelos que têm rotação,
 então, caso esteja usando um .obj de versões anteriores, recalcule as normals;
 
-## Update B.1.0.0.1
-Adicionado compatibilidade com outros editores 3D que não suportam caracteres especiais #: como, por exemplo, o 3dsMax;
+**Update B.1.0.0.1**
+<br>Adicionado compatibilidade com outros editores 3D que não suportam caracteres especiais #: como, por exemplo, o 3dsMax;
 <br> Adicionado também uma verificação no nome dos grupos, então caso esteja errado o nome, o programa avisa-rá;
 <br> Os arquivos da versão anterior são compatíveis com essa versão;
 
@@ -87,8 +92,8 @@ Faz o repack do cenário, recebe como parâmetro o arquivo ".idxscenario",
 
 ## DrawDistance
 caso o seu modelo fique muito longe da posição original, ele pode começa a aparecer e desaparecer, isso é por causa dos valores que definem a que distancia os modelos iram ser vistos.
-<br> mude os valores de "xxx_DrawDistanceNegative*" para -327670
-<br> e os valores de "xxx_DrawDistancePositive*:" para 655340
+<br> mude os valores de "xxx_DrawDistanceNegative*" para -327670 ou 0
+<br> e os valores de "xxx_DrawDistancePositive*:" para 655340 ou 0
 <br> isso vai garantir que o modelo fique visível, porem pode gerar um bug na iluminação.
 <br> Updade B.1.0.0.1, mudei o arquivo "r209.scenario.DrawDistance.obj", para representação correta, pois "xxx_DrawDistancePositive*" não é uma posição, mas sim deve ser somado com "xxx_DrawDistanceNegative" para ter a segunda posição correta;
 
@@ -103,4 +108,4 @@ ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_positi
 Encontra-se no RE4_PMD_Repack, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
 
 **At.te: JADERLINK**
-<br>2024-03-03
+<br>2024-03-30
