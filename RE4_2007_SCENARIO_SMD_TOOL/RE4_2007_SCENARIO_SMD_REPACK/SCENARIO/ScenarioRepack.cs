@@ -385,7 +385,7 @@ namespace RE4_2007_SCENARIO_SMD_REPACK
             for (int i = 0; i < BinCount; i++)
             {
                
-                byte[] bb = InternalFiles.BIN;
+                byte[] bb = InternalFiles.BIN.ToArray();
 
                 //DrawDistance
 

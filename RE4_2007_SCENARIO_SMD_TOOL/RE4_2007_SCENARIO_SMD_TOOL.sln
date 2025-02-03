@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34031.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE4_2007_SCENARIO_SMD_EXTRACT", "RE4_2007_SCENARIO_SMD_EXTRACT\RE4_2007_SCENARIO_SMD_EXTRACT.csproj", "{F2084D3C-BE2C-4C19-8066-4656B00E5799}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE4_2007_SCENARIO_SMD_REPACK", "RE4_2007_SCENARIO_SMD_REPACK\RE4_2007_SCENARIO_SMD_REPACK.csproj", "{3D4DDC7E-4EF2-482C-B084-4C19EB276A6A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CjClutter.ObjLoader.Loader", "CjClutter.ObjLoader.Loader\CjClutter.ObjLoader.Loader.shproj", "{8A3A7579-5EF1-448E-A7E3-2BF569F56ED4}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CjClutter.ObjLoader.Loader\CjClutter.ObjLoader.Loader.projitems*{3d4ddc7e-4ef2-482c-b084-4c19eb276a6a}*SharedItemsImports = 4
+		CjClutter.ObjLoader.Loader\CjClutter.ObjLoader.Loader.projitems*{8a3a7579-5ef1-448e-a7e3-2bf569f56ed4}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2084D3C-BE2C-4C19-8066-4656B00E5799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2084D3C-BE2C-4C19-8066-4656B00E5799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2084D3C-BE2C-4C19-8066-4656B00E5799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2084D3C-BE2C-4C19-8066-4656B00E5799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4DDC7E-4EF2-482C-B084-4C19EB276A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4DDC7E-4EF2-482C-B084-4C19EB276A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4DDC7E-4EF2-482C-B084-4C19EB276A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4DDC7E-4EF2-482C-B084-4C19EB276A6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73669CD5-836E-460E-9F08-F6D146DEC61F}
+	EndGlobalSection
+EndGlobal

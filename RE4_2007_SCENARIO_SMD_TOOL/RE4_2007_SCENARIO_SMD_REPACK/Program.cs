@@ -10,10 +10,12 @@ namespace RE4_2007_SCENARIO_SMD_REPACK
 {
     class Program
     {
-        public static string VERSION = "B.1.0.13 (2024-03-30)";
+        public const string VERSION = "B.1.1.0 (2025-02-03)";
 
         static void Main(string[] args)
         {
+            System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
             Console.WriteLine("# github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL");
             Console.WriteLine("# youtube.com/@JADERLINK");
             Console.WriteLine("# RE4_2007_SCENARIO_SMD_TOOL (REPACK) By JADERLINK");
@@ -38,16 +40,16 @@ namespace RE4_2007_SCENARIO_SMD_REPACK
                 }
                 else
                 {
-                    Console.WriteLine("Invalid file");
+                    Console.WriteLine("Invalid file!");
                 }
 
             }
             else
             {
-                Console.WriteLine("The file does not exist");
+                Console.WriteLine("The file does not exist!");
             }
 
-            Console.WriteLine("End");
+            Console.WriteLine("Finished!!!");
         }
 
         private static void Action(FileInfo fileinfo)
@@ -72,7 +74,7 @@ namespace RE4_2007_SCENARIO_SMD_REPACK
                     {
                         if (!File.Exists(materialPath))
                         {
-                            Console.WriteLine(new FileInfo(materialPath).Name + " does not exist");
+                            Console.WriteLine(new FileInfo(materialPath).Name + " does not exist!");
                             return;
                         }
                         else
@@ -84,7 +86,7 @@ namespace RE4_2007_SCENARIO_SMD_REPACK
 
                     if (!File.Exists(mtlPath))
                     {
-                        Console.WriteLine(new FileInfo(mtlPath).Name + " does not exist");
+                        Console.WriteLine(new FileInfo(mtlPath).Name + " does not exist!");
                         return;
                     }
                     else
@@ -104,7 +106,7 @@ namespace RE4_2007_SCENARIO_SMD_REPACK
             }
             else
             {
-                Console.WriteLine(new FileInfo(objPath).Name + " does not exist");
+                Console.WriteLine(new FileInfo(objPath).Name + " does not exist!");
             }
 
         }

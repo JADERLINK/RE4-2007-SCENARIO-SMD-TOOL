@@ -139,7 +139,7 @@ namespace RE4_2007_PMD_REPACK
                 }
                 else
                 {
-                    Console.WriteLine("Mtl file does not exist");
+                    Console.WriteLine("Mtl file does not exist!");
                 }
 
             }

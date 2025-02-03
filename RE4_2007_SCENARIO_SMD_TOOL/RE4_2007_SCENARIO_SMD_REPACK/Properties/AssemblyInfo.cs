@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("JADERLINK")]
 [assembly: AssemblyProduct("RE4_2007_SCENARIO_SMD_REPACK")]
-[assembly: AssemblyCopyright("Copyright © JADERLINK 2024")]
+[assembly: AssemblyCopyright("Copyright © JADERLINK 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

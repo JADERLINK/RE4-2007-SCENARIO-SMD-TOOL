@@ -1,11 +1,15 @@
 # RE4-2007-SCENARIO-SMD-TOOL
-Extract and repack RE4 2007 scenario smd/pmd files
+Extract and repack RE4 2007 scenario SMD/PMD files
 
-Translate from Portuguese Brazil
+**Translate from Portuguese Brazil**
 
 Programas destinados a extrair e recompactar os cenários usando somente um arquivo .OBJ
 
 ## Updates
+
+**Update B.1.1.0**
+<br> Melhoria: melhorado a velocidade do repack, agora é muito rápido fazer o repack.
+<br> E foram feitas melhorias gerais no código;
 
 **Update B.1.0.13**
 <br>Agora, o programa, ao gerar o arquivo .obj, não terá mais os zeros não significativos dos números, mudança feita para gerar arquivos menores.
@@ -105,7 +109,7 @@ ao mudar os valores originais dos campos "xxx_scale*", "xxx_angle*", "xxx_positi
 ## Código de terceiro:
 
 [ObjLoader by chrisjansson](https://github.com/chrisjansson/ObjLoader):
-Encontra-se no RE4_PMD_Repack, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
+Encontra-se no RE4_2007_SCENARIO_SMD_TOOL/CjClutter.ObjLoader.Loader, código modificado, as modificações podem ser vistas aqui: [link](https://github.com/JADERLINK/ObjLoader).
 
 **At.te: JADERLINK**
-<br>2024-03-30
+<br>2025-02-03

@@ -9,7 +9,7 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
 {
     class Program
     {
-        public static string VERSION = "B.1.0.13 (2024-03-30)";
+        public const string VERSION = "B.1.1.0 (2025-02-03)";
 
         public static string HeaderText()
         {
@@ -20,6 +20,8 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
 
         static void Main(string[] args)
         {
+            System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
             Console.WriteLine("# github.com/JADERLINK/RE4-2007-SCENARIO-SMD-TOOL");
             Console.WriteLine("# youtube.com/@JADERLINK");
             Console.WriteLine("# RE4_2007_SCENARIO_SMD_TOOL (EXTRACT) By JADERLINK");
@@ -95,15 +97,15 @@ namespace RE4_2007_SCENARIO_SMD_EXTRACT
                 }
                 else
                 {
-                    Console.WriteLine("it is not an SMD file");
+                    Console.WriteLine("it is not an SMD file!");
                 }
             }
             else
             {
-                Console.WriteLine("Invalid arguments or invalid file");
+                Console.WriteLine("Invalid arguments or invalid file!");
             }
 
-            Console.WriteLine("End");
+            Console.WriteLine("Finished!!!");
         }
     }
 }
